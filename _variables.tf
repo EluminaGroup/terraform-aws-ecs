@@ -323,7 +323,7 @@ variable "ec2_key_enabled" {
 }
 
 variable "vpn_cidr" {
-  default     = [""]
+  default     = []
   description = "Cidr of VPN to grant ssh access to ECS nodes"
 }
 
