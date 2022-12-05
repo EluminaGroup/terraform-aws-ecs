@@ -46,3 +46,14 @@ resource "aws_security_group_rule" "from_alb_internal_to_ecs_nodes" {
   security_group_id        = aws_security_group.alb_internal[0].id
   source_security_group_id = aws_security_group.ecs_nodes.id
 }
+
+resource "aws_security_group_rule" "vpn_access" {
+  count                    = var.vpn_cidr != "" ? 1 : 0
+  
+  type                     = "ingress"
+  from_port                = "-1"
+  to_port                  = "-1"
+  protocol                 = "-1"
+  security_group_id        = aws_security_group.alb_internal[0].id
+  cidr_blocks              = var.vpn_cidr
+}
