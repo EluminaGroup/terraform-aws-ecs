@@ -48,7 +48,7 @@ resource "aws_security_group_rule" "from_alb_internal_to_ecs_nodes" {
 }
 
 resource "aws_security_group_rule" "vpn_access" {
-  count                    = length(var.vpn_cidr) != 0 ? 1 : 0
+  count                    =  var.alb_internal ? length(var.vpn_cidr) != 0 ? 1 : 0 : 0
   
   type                     = "ingress"
   from_port                = "-1"
